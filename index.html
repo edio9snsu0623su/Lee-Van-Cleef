@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>李范克里夫 - 傳奇西部片演員致敬網站</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #8B4513 0%, #D2691E 50%, #CD853F 100%);
+            color: #2F1B14;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* 背景西部風格 */
+        .background-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(139, 69, 19, 0.1) 2px, transparent 2px),
+                radial-gradient(circle at 75% 75%, rgba(210, 180, 140, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+        }
+
+        header {
+            text-align: center;
+            padding: 2rem 1rem;
+            background: rgba(0, 0, 0, 0.8);
+            color: #D4AF37;
+            position: relative;
+            border-bottom: 3px solid #D4AF37;
+        }
+
+        .hero-title {
+            font-size: 3.5em;
+            margin-bottom: 0.5rem;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+            animation: goldGlow 3s ease-in-out infinite alternate;
+        }
+
+        .subtitle {
+            font-size: 1.5em;
+            font-style: italic;
+            margin-bottom: 1rem;
+            color: #F4A460;
+        }
+
+        .years {
+            font-size: 1.2em;
+            color: #DDD;
+        }
+
+        /* 主要內容區域 */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        /* 點擊區域 */
+        .click-section {
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            border: 3px solid #D4AF37;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .click-portrait {
+            width: 300px;
+            height: 400px;
+            background: linear-gradient(45deg, #8B4513, #CD853F);
+            border-radius: 15px;
+            margin: 0 auto 1rem;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 4px solid #D4AF37;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            overflow: hidden;
+        }
+
+        .click-portrait:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px #D4AF37;
+            border-color: #FFD700;
+        }
+
+        .click-portrait::before {
+            content: '🤠';
+            font-size: 4em;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .click-portrait {
+         background-image: url('./lee-van-cleef.jpg');
+         background-size: cover;
+         background-position: center;
+       }
+
+        .click-portrait::after {
+            content: '點擊向李范致敬！';
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.9em;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            border: 1px solid #D4AF37;
+        }
+
+        .click-counter {
+            background: rgba(212, 175, 55, 0.2);
+            border: 2px solid #D4AF37;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-top: 1rem;
+            color: #FFD700;
+        }
+
+        .counter-number {
+            font-size: 3em;
+            font-weight: bold;
+            display: block;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        /* 資訊區域 */
+        .info-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .info-title {
+            color: #8B4513;
+            font-size: 2em;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #D4AF37;
+            padding-bottom: 0.5rem;
+        }
+
+        .info-content {
+            line-height: 1.8;
+            font-size: 1.1em;
+            margin-bottom: 1.5rem;
+        }
+
+        .famous-movies {
+            background: rgba(139, 69, 19, 0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 5px solid #D4AF37;
+        }
+
+        .movie-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .movie-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px dotted #8B4513;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .movie-list li::before {
+            content: '🎬';
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+        }
+
+        .movie-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* 統計區域 */
+        .stats-section {
+            grid-column: span 2;
+            background: rgba(0, 0, 0, 0.8);
+            color: #D4AF37;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .stat-item {
+            background: rgba(212, 175, 55, 0.2);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid #D4AF37;
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            display: block;
+            color: #FFD700;
+        }
+
+        .stat-label {
+            font-size: 1.1em;
+            margin-top: 0.5rem;
+        }
+
+        /* 點擊效果 */
+        .click-effect {
+            position: absolute;
+            pointer-events: none;
+            color: #FFD700;
+            font-size: 2em;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            animation: clickPop 1s ease-out forwards;
+        }
+
+        /* 響應式設計 */
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                padding: 1rem;
+            }
+            
+            .hero-title {
+                font-size: 2.5em;
+            }
+            
+            .click-portrait {
+                width: 250px;
+                height: 300px;
+            }
+            
+            .stats-section {
+                grid-column: span 1;
+            }
+        }
+
+        /* 動畫效果 */
+        @keyframes goldGlow {
+            0% { text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7); }
+            100% { text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7), 0 0 20px #D4AF37; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        @keyframes clickPop {
+            0% {
+                transform: translate(-50%, -50%) scale(0);
+                opacity: 1;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.2);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        /* 背景星星效果 */
+        .star {
+            position: absolute;
+            color: #D4AF37;
+            font-size: 1.5em;
+            animation: twinkle 3s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-pattern"></div>
+    
+    <header>
+        <h1 class="hero-title">李范克里夫</h1>
+        <p class="subtitle">Lee Van Cleef</p>
+        <p class="years">1925 - 1989</p>
+        <p>西部片傳奇演員 • 惡役專家 • 電影史上最具標誌性的反派之一</p>
+    </header>
+
+    <div class="main-content">
+        <div class="click-section">
+            <div class="click-portrait" id="portrait">
+                <div>李范克里夫<br>Lee Van Cleef</div>
+            </div>
+            <div class="click-counter">
+                <span>你已經向李范致敬</span>
+                <span class="counter-number" id="clickCount">0</span>
+                <span>次</span>
+            </div>
+            <p style="color: #D4AF37; margin-top: 1rem; font-style: italic;">
+                "在一個沒有法律的土地上，人必須為自己制定規則。"
+            </p>
+        </div>
+
+        <div class="info-section">
+            <h2 class="info-title">關於李范克里夫</h2>
+            <div class="info-content">
+                李范克里夫是美國電影史上最具標誌性的西部片演員之一，以其鷹鉤鼻、犀利眼神和冷酷的反派形象聞名於世。他在1960年代與克林·伊斯威特和艾利·瓦拉赫共同主演的「鏢客三部曲」中的表現，奠定了他在電影史上的地位。
+
+                <br><br>
+
+                李范克里夫的演藝生涯橫跨四十多年，從1952年的《正午》開始，到1989年去世前不久，他一直活躍在銀幕上。他獨特的外貌和精湛的演技，讓他成為西部片中最令人印象深刻的反派角色。
+            </div>
+
+            <div class="famous-movies">
+                <h3 style="color: #8B4513; margin-bottom: 1rem;">經典代表作品</h3>
+                <ul class="movie-list">
+                    <li><strong>正午</strong> (High Noon, 1952)</li>
+                    <li><strong>黃昏三鏢客</strong> (For a Few Dollars More, 1965)</li>
+                    <li><strong>黃金三鏢客</strong> (The Good, the Bad and the Ugly, 1966)</li>
+                    <li><strong>豹行天下</strong> (Day of Anger, 1967)</li>
+                    <li><strong>絞刑台上的旋律</strong> (Hang 'Em High, 1968)</li>
+                    <li><strong>大漠英豪</strong> (The Big Gundown, 1966)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="stats-section">
+            <h2 style="margin-bottom: 1rem;">李范致敬統計</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number" id="totalClicks">0</span>
+                    <div class="stat-label">總致敬次數</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="sessionClicks">0</span>
+                    <div class="stat-label">本次瀏覽致敬次數</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="avgClicks">0</span>
+                    <div class="stat-label">平均每次瀏覽致敬次數</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="visitCount">0</span>
+                    <div class="stat-label">網站總瀏覽次數</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 點擊計數系統
+        class ClickCounter {
+            constructor() {
+                this.sessionClicks = 0;
+                this.init();
+            }
+
+            init() {
+                // 初始化數據
+                this.loadData();
+                this.updateDisplay();
+                this.setupEventListeners();
+                this.addVisit();
+                this.createStars();
+            }
+
+            loadData() {
+                // 從內存變數載入數據（因為不能使用localStorage）
+                if (!window.siteData) {
+                    window.siteData = {
+                        totalClicks: 0,
+                        visitCount: 0,
+                        sessions: []
+                    };
+                }
+            }
+
+            saveData() {
+                // 數據已經保存在window.siteData中
+                // 在實際環境中，這裡可以發送到服務器
+            }
+
+            addClick() {
+                this.sessionClicks++;
+                window.siteData.totalClicks++;
+                this.updateDisplay();
+                this.saveData();
+                this.showClickEffect();
+            }
+
+            addVisit() {
+                window.siteData.visitCount++;
+                window.siteData.sessions.push({
+                    date: new Date().toISOString(),
+                    clicks: 0
+                });
+                this.saveData();
+            }
+
+            updateDisplay() {
+                document.getElementById('clickCount').textContent = this.sessionClicks;
+                document.getElementById('totalClicks').textContent = window.siteData.totalClicks;
+                document.getElementById('sessionClicks').textContent = this.sessionClicks;
+                document.getElementById('visitCount').textContent = window.siteData.visitCount;
+                
+                const avgClicks = window.siteData.visitCount > 0 ? 
+                    (window.siteData.totalClicks / window.siteData.visitCount).toFixed(1) : 0;
+                document.getElementById('avgClicks').textContent = avgClicks;
+            }
+
+            showClickEffect() {
+                const portrait = document.getElementById('portrait');
+                const effect = document.createElement('div');
+                effect.className = 'click-effect';
+                effect.textContent = '+1 致敬!';
+                
+                // 隨機位置
+                const rect = portrait.getBoundingClientRect();
+                const x = Math.random() * rect.width;
+                const y = Math.random() * rect.height;
+                
+                effect.style.position = 'absolute';
+                effect.style.left = x + 'px';
+                effect.style.top = y + 'px';
+                effect.style.zIndex = '1000';
+                
+                portrait.appendChild(effect);
+                
+                // 移除效果元素
+                setTimeout(() => {
+                    if (portrait.contains(effect)) {
+                        portrait.removeChild(effect);
+                    }
+                }, 1000);
+
+                // 添加震動效果
+                portrait.style.animation = 'none';
+                portrait.offsetHeight; // 強制重繪
+                portrait.style.animation = 'pulse 0.5s ease-in-out';
+            }
+
+            setupEventListeners() {
+                document.getElementById('portrait').addEventListener('click', () => {
+                    this.addClick();
+                });
+
+                // 鍵盤快捷鍵
+                document.addEventListener('keydown', (e) => {
+                    if (e.code === 'Space' || e.key === 'Enter') {
+                        e.preventDefault();
+                        this.addClick();
+                    }
+                });
+            }
+
+            createStars() {
+                // 創建背景星星效果
+                for (let i = 0; i < 20; i++) {
+                    const star = document.createElement('div');
+                    star.className = 'star';
+                    star.textContent = '★';
+                    star.style.left = Math.random() * 100 + '%';
+                    star.style.top = Math.random() * 100 + '%';
+                    star.style.animationDelay = Math.random() * 3 + 's';
+                    document.body.appendChild(star);
+                }
+            }
+        }
+
+        // 初始化應用
+        document.addEventListener('DOMContentLoaded', () => {
+            const counter = new ClickCounter();
+            
+            // 顯示歡迎訊息
+            setTimeout(() => {
+                if (counter.sessionClicks === 0) {
+                    alert('歡迎來到李范克里夫致敬網站！\n點擊他的肖像來表達你的敬意！');
+                }
+            }, 1000);
+        });
+
+        // 定期更新顯示
+        setInterval(() => {
+            // 可以在這裡添加任何定期更新的邏輯
+        }, 5000);
+    </script>
+</body>
+</html>
